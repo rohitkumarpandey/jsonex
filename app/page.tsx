@@ -8,7 +8,7 @@ export default function LandingPage() {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "calc(100vh - 60px)",
         width: "100%",
         display: "flex",
         flexDirection: "column",

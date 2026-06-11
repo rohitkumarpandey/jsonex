@@ -8,9 +8,19 @@ type Props = {
   data: any;
 };
 
+// 🔥 truncate helper
+function truncate(value: any, max = 15) {
+  const str = String(value);
+  return str.length > max ? str.slice(0, max) + "..." : str;
+}
+
 function convertToTree(data: any, name = "root"): any {
   if (typeof data !== "object" || data === null) {
-    return { name: `${name}: ${data}` };
+    const raw = String(data);
+
+    return {
+      name: `${name}: ${truncate(raw)}`,
+    };
   }
 
   if (Array.isArray(data)) {
@@ -35,17 +45,21 @@ export default function JsonGraph({ data }: Props) {
 
   const [mounted, setMounted] = useState(false);
 
-  const [translate, setTranslate] = useState({ x: 200, y: 200 });
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
   const [zoom, setZoom] = useState(0.8);
-  const [modalZoom, setModalZoom] = useState(0.8); // ✅ separate zoom
+  const [modalZoom, setModalZoom] = useState(0.9);
 
   const [openModal, setOpenModal] = useState(false);
 
+  const treeData = data ? convertToTree(data) : null;
+
+  // ✅ SSR safety
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // ✅ Auto center graph properly
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -53,18 +67,16 @@ export default function JsonGraph({ data }: Props) {
       containerRef.current.getBoundingClientRect();
 
     setTranslate({
-      x: width / 4,
+      x: width / 3,
       y: height / 2,
     });
-  }, [data]);
+  }, [data, mounted]);
 
   if (!data || !mounted) return <div>Loading...</div>;
 
-  const treeData = convertToTree(data);
-
-  // 🔥 open modal with reset zoom
+  // 🔥 open modal + reset zoom
   const openFullscreen = () => {
-    setModalZoom(0.8);
+    setModalZoom(0.9);
     setOpenModal(true);
   };
 
@@ -97,10 +109,7 @@ export default function JsonGraph({ data }: Props) {
           <button className="graph-btn" onClick={() => setZoom((z) => Math.max(0.3, z - 0.2))}>-</button>
           <button className="graph-btn" onClick={() => setZoom(0.8)}>Reset</button>
 
-          <button
-            className="graph-btn"
-            onClick={openFullscreen}
-          >
+          <button className="graph-btn" onClick={openFullscreen}>
             ⛶
           </button>
         </div>
@@ -121,7 +130,7 @@ export default function JsonGraph({ data }: Props) {
         />
       </div>
 
-      {/* 🔥 MODAL */}
+      {/* 🔥 MODAL GRAPH */}
       <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
         <div
           style={{
@@ -144,19 +153,19 @@ export default function JsonGraph({ data }: Props) {
           >
             <button className="graph-btn" onClick={() => setModalZoom((z) => z + 0.2)}>+</button>
             <button className="graph-btn" onClick={() => setModalZoom((z) => Math.max(0.3, z - 0.2))}>-</button>
-            <button className="graph-btn" onClick={() => setModalZoom(0.8)}>Reset</button>
+            <button className="graph-btn" onClick={() => setModalZoom(0.9)}>Reset</button>
           </div>
 
           <Tree
             data={treeData}
             orientation="horizontal"
             pathFunc="elbow"
-            translate={{ x: 400, y: 400 }}
+            translate={{ x: 500, y: 450 }}
             zoom={modalZoom}
             zoomable
             draggable
             scaleExtent={{ min: 0.3, max: 2 }}
-            nodeSize={{ x: 240, y: 110 }}
+            nodeSize={{ x: 260, y: 120 }}
             rootNodeClassName="node__root"
             branchNodeClassName="node__branch"
             leafNodeClassName="node__leaf"
