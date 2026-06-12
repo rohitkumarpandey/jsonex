@@ -249,8 +249,8 @@ h2 {
 }
 
 /* hover effect */
-.node__branch:hover ~ .rd3t-link,
-.node__leaf:hover ~ .rd3t-link {
+.node__branch:hover~.rd3t-link,
+.node__leaf:hover~.rd3t-link {
   stroke: var(--accent) !important;
   stroke-width: 2px;
 }
@@ -265,7 +265,14 @@ h2 {
 .json-tree-container,
 .json-graph-container {
   width: 28%;
-  height: 90vh,
+  min-height: 50vh !important;
+  max-height: 90vh !important;
+  border-left: .1rem solid var(--border) !important;
+  border-right: .1rem solid var(--border) !important;
+}
+
+.json-graph-container {
+  width: 44%;
 }
 
 /* Mobile (up to 767px) */
@@ -277,13 +284,19 @@ h2 {
 
   .jsonkit-container {
     flex-direction: column;
+    gap: 2.4rem;
   }
 
   .json-editor-container,
   .json-tree-container,
   .json-graph-container {
-    width: 100%;
-    height: 70vh;
+    width: 100% !important;
+    min-height: 32vh !important;
+    max-height: 64vh !important;
+    border: .1rem solid var(--border) !important;
+  }
+  .json-graph-container  .rd3t-tree-container {
+    height: 64vh !important;
   }
 
   .container {
@@ -297,15 +310,22 @@ h2 {
     font-size: 62.5%;
     /* 1rem = 10px */
   }
+
   .jsonkit-container {
     flex-direction: column;
+    gap: 2.4rem;
   }
 
   .json-editor-container,
   .json-tree-container,
   .json-graph-container {
-    width: 100%;
-    height: 70vh;
+    width: 100% !important;
+    min-height: 32vh !important;
+    max-height: 64vh !important;
+    border: .1rem solid var(--border) !important;
+  }
+  .json-graph-container  .rd3t-tree-container {
+    height: 64vh !important;
   }
 
   .container {

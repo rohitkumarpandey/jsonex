@@ -72,10 +72,8 @@ export default function JsonEditor({ json, handleJsonChange }: Props) {
         display: "flex",
         flexDirection: "column",
         fontSize: "1.2rem",
-        borderRight: ".1rem solid var(--border)",
-        background: "var(--bg)",
         position: "relative",
-        overflow: "hidden", 
+        overflow: "hidden"
       }}
       className="json-editor-container"
     >

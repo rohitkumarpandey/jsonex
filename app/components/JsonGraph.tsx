@@ -86,10 +86,8 @@ export default function JsonGraph({ data }: Props) {
       <div
         ref={containerRef}
         style={{
-          background: "var(--bg)",
           position: "relative",
-          borderLeft: "0.1rem solid var(--border)",
-          overflow: "hidden",
+          overflow: "hidden"
         }}
         className="json-graph-container"
       >
@@ -159,7 +157,7 @@ export default function JsonGraph({ data }: Props) {
             data={treeData}
             orientation="horizontal"
             pathFunc="elbow"
-            translate={{ x: 500, y: 450 }}
+            translate={translate}
             zoom={modalZoom}
             zoomable
             draggable

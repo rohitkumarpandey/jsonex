@@ -216,8 +216,6 @@ export default function JsonTree({ data }: Props) {
         display: "flex",
         flexDirection: "column",
         background: "var(--bg)",
-        borderRight: "0.1rem solid var(--border)",
-        borderLeft: "0.1rem solid var(--border)",
         fontFamily: "var(--mono)",
       }}
       className="json-tree-container"
