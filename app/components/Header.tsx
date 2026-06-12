@@ -37,12 +37,12 @@ export default function Header() {
     <header
       style={{
         width: "100%",
-        height: "60px",
+        height: "6rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 20px",
-        borderBottom: "1px solid var(--border)",
+        padding: "0 2rem",
+        borderBottom: ".1rem solid var(--border)",
         background: "var(--bg)",
         position: "sticky",
         top: 0,
@@ -56,16 +56,17 @@ export default function Header() {
           fontWeight: 700,
           color: "var(--text-h)",
           cursor: "pointer",
-          letterSpacing: "0.5px",
+          letterSpacing: "0.05rem",
+          fontSize: "2.4rem",
         }}
       >
         JSONKit
       </div>
 
       {/* Actions */}
-      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: "1.2rem", alignItems: "center" }}>
         {/* Theme Toggle */}
-        <button
+        {/* <button
           onClick={toggleTheme}
           className="graph-btn"
           title="Toggle theme"
@@ -73,7 +74,7 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "6px 10px",
+            padding: "6rem 10rem",
           }}
         >
           {theme === "dark" ? (
@@ -81,7 +82,7 @@ export default function Header() {
           ) : (
             <Moon size={16} />
           )}
-        </button>
+        </button> */}
       </div>
     </header>
   );

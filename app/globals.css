@@ -11,14 +11,13 @@
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.1) 0 1rem 1.5rem -0.3rem,
+    rgba(0, 0, 0, 0.05) 0 0.4rem 0.6rem -0.2rem;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  letter-spacing: 0.018rem;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -26,10 +25,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,14 +39,16 @@
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+      rgba(0, 0, 0, 0.4) 0 1rem 1.5rem -0.3rem,
+      rgba(0, 0, 0, 0.25) 0 0.4rem 0.6rem -0.2rem;
   }
 
   #social .button-icon {
     filter: invert(1) brightness(2);
   }
 }
-/* Light theme (default already :root) */
+
+/* Light theme */
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -59,7 +56,7 @@
   --border: #e5e4e7;
 }
 
-/* Dark override (manual toggle) */
+/* Dark override */
 [data-theme="dark"] {
   --text: #9ca3af;
   --text-h: #f3f4f6;
@@ -71,6 +68,27 @@
   --accent-border: rgba(192, 132, 252, 0.5);
 }
 
+:root {
+  --font-sans: Geist, system-ui;
+  --font-mono: Geist Mono, monospace;
+  --font-display: Darker Grotesque, system-ui;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-display) !important;
+  margin: 0;
+}
+
+p {
+  font-family: var(--font-sans) !important;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;
@@ -78,96 +96,71 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-}
-
+/* HEADINGS */
 h1,
 h2 {
-  font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
+  font-size: 5.6rem;
+  letter-spacing: -0.168rem;
+  margin: 3.2rem 0;
+}
 
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 3.6rem;
+    margin: 2rem 0;
   }
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 2.4rem;
   line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
+  letter-spacing: -0.024rem;
+  margin: 0 0 0.8rem;
+}
 
-  @media (max-width: 1024px) {
-    font-size: 20px;
+@media (max-width: 1024px) {
+  h2 {
+    font-size: 2rem;
   }
 }
 
-p {
-  margin: 0;
-}
-
-
+/* CODE PANEL */
 .cm-panels {
   background: #1e1e1e;
-  padding: 4px;
+  padding: 0.4rem;
   z-index: 10;
 }
 
 .cm-panel input {
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
-/* 🌳 Nodes */
-.node__root circle {
-  fill: var(--accent);
-}
-
-.node__branch circle {
-  fill: var(--text);
-  opacity: 0.9;
-}
-
-.node__leaf circle {
-  fill: var(--accent);
-  opacity: 0.7;
-}
-
-/* 📝 Labels */
-.node__root text {
-  fill: var(--text-h);
-  font-size: 12px;
-  font-weight: 600;
-}
-
+/* NODES */
+.node__root text,
 .node__branch text,
 .node__leaf text {
-  fill: var(--text);
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
-/* 🔗 Links */
+/* LINKS */
 .rd3t-link {
   stroke: var(--border);
-  stroke-width: 1.5px;
+  stroke-width: 0.15rem;
 }
 
-/* 🎛 Controls */
+/* BUTTONS */
 .graph-btn {
   background: var(--code-bg);
   color: var(--text);
-  border: 1px solid var(--border);
-  padding: 4px 8px;
+  border: 0.1rem solid var(--border);
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 .graph-btn:hover {
@@ -176,68 +169,7 @@ p {
   border-color: var(--accent-border);
 }
 
-/* 🌳 Nodes */
-.node__root circle {
-  fill: var(--accent);
-}
-
-.node__branch circle {
-  fill: var(--text);
-  opacity: 0.9;
-}
-
-.node__leaf circle {
-  fill: var(--accent);
-  opacity: 0.7;
-}
-
-/* 📝 Labels */
-.node__root text {
-  fill: var(--text-h);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.node__branch text,
-.node__leaf text {
-  fill: var(--text);
-  font-size: 12px;
-}
-
-/* 🔗 Links */
-.rd3t-link {
-  stroke: var(--border);
-  stroke-width: 1.5px;
-}
-
-/* 🎛 Controls */
-.graph-btn {
-  background: var(--code-bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 4px 8px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.graph-btn:hover {
-  background: var(--accent-bg);
-  color: var(--text-h);
-  border-color: var(--accent-border);
-}
-
-.rd3t-link {
-  stroke: lightslategray !important;
-  stroke-width: 1.5px;
-  opacity: 0.8;
-}
-
-.node__branch:hover~.rd3t-link,
-.node__leaf:hover~.rd3t-link {
-  stroke: var(--accent);
-  stroke-width: 2px;
-}
-
+/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -252,8 +184,8 @@ p {
   width: 98%;
   height: 98%;
   background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 0.1rem solid var(--border);
+  border-radius: 0.8rem;
   position: relative;
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -261,12 +193,12 @@ p {
 
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1rem;
+  right: 1rem;
   background: var(--code-bg);
-  border: 1px solid var(--border);
+  border: 0.1rem solid var(--border);
   color: var(--text);
-  padding: 4px 8px;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
   z-index: 10;
 }
@@ -274,4 +206,109 @@ p {
 .modal-close:hover {
   background: var(--accent-bg);
   color: var(--text-h);
+}
+
+/* 🌳 Nodes */
+.node__root circle,
+.node__branch circle,
+.node__leaf circle {
+  fill: var(--accent);
+  stroke: var(--border);
+  stroke-width: 1.5px;
+}
+
+/* Different emphasis */
+.node__branch circle {
+  fill: var(--text);
+  opacity: 0.9;
+}
+
+.node__leaf circle {
+  fill: var(--accent);
+  opacity: 0.7;
+}
+
+/* 📝 Labels */
+.node__root text {
+  fill: var(--text-h);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.node__branch text,
+.node__leaf text {
+  fill: var(--text);
+  font-size: 1.2rem;
+}
+
+/* 🔗 Links (IMPORTANT FIX) */
+.rd3t-link {
+  stroke: var(--border) !important;
+  stroke-width: 1.5px;
+  opacity: 0.8;
+}
+
+/* hover effect */
+.node__branch:hover ~ .rd3t-link,
+.node__leaf:hover ~ .rd3t-link {
+  stroke: var(--accent) !important;
+  stroke-width: 2px;
+}
+
+.jsonkit-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.json-editor-container,
+.json-tree-container,
+.json-graph-container {
+  width: 28%;
+  height: 90vh,
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+  html {
+    font-size: 56.25%;
+    /* 1rem = 9px */
+  }
+
+  .jsonkit-container {
+    flex-direction: column;
+  }
+
+  .json-editor-container,
+  .json-tree-container,
+  .json-graph-container {
+    width: 100%;
+    height: 70vh;
+  }
+
+  .container {
+    padding: 1.6rem;
+  }
+}
+
+/* Tablet (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+    /* 1rem = 10px */
+  }
+  .jsonkit-container {
+    flex-direction: column;
+  }
+
+  .json-editor-container,
+  .json-tree-container,
+  .json-graph-container {
+    width: 100%;
+    height: 70vh;
+  }
+
+  .container {
+    padding: 2.4rem;
+  }
 }

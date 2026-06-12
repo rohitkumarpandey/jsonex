@@ -22,7 +22,6 @@ type Props = {
   handleJsonChange: (val: string) => void;
 };
 
-// JSON linter
 const jsonLinter = linter((view) => {
   const text = view.state.doc.toString();
   try {
@@ -43,7 +42,6 @@ const jsonLinter = linter((view) => {
 export default function JsonEditor({ json, handleJsonChange }: Props) {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
-  // sync with global theme
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const current =
@@ -59,13 +57,11 @@ export default function JsonEditor({ json, handleJsonChange }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  // ✨ Beautify function
   const handleBeautify = () => {
     try {
       const parsed = JSON.parse(json);
-      const formatted = JSON.stringify(parsed, null, 2);
-      handleJsonChange(formatted);
-    } catch (e) {
+      handleJsonChange(JSON.stringify(parsed, null, 2));
+    } catch {
       alert("Invalid JSON ❌ Please fix errors before formatting.");
     }
   };
@@ -73,18 +69,17 @@ export default function JsonEditor({ json, handleJsonChange }: Props) {
   return (
     <div
       style={{
-        height: "90vh",
-        width: "28%",
         display: "flex",
         flexDirection: "column",
-        overflow: "hidden",
-        fontSize: "12px",
-        borderRight: "1px solid var(--border)",
+        fontSize: "1.2rem",
+        borderRight: ".1rem solid var(--border)",
         background: "var(--bg)",
         position: "relative",
+        overflow: "hidden", 
       }}
+      className="json-editor-container"
     >
-      {/* 🔥 Toolbar */}
+      {/* TOOLBAR */}
       <div
         style={{
           position: "absolute",
@@ -92,56 +87,57 @@ export default function JsonEditor({ json, handleJsonChange }: Props) {
           right: 8,
           zIndex: 10,
           display: "flex",
-          gap: "6px",
+          gap: ".6rem",
         }}
       >
         <button
           onClick={handleBeautify}
-          title="Beautify JSON"
           style={{
             background: "var(--accent-bg)",
             color: "var(--text-h)",
-            border: "1px solid var(--accent-border)",
-            borderRadius: "6px",
-            padding: "4px 8px",
+            border: ".1rem solid var(--accent-border)",
+            borderRadius: ".6rem",
+            padding: ".4rem .8rem",
             cursor: "pointer",
-            fontSize: "12px",
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" />
-          </svg>
+          ≡
         </button>
       </div>
 
-      <CodeMirror
-        value={json}
-        height="100%"
-        width="100%"
-        theme={theme === "dark" ? dracula : githubLight}
-        basicSetup={{
-          lineNumbers: true,
-          highlightActiveLine: true,
+      {/* 🔥 CRITICAL FIX: this becomes scroll container */}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          overflow: "auto",   // 🔥 ONLY THIS SCROLLS (wrapper)
         }}
-        extensions={[
-          jsonLang(),
-          jsonLinter,
-          EditorView.lineWrapping,
-          highlightSelectionMatches(),
-          keymap.of(searchKeymap),
-          jsonKitTheme,
-          syntaxHighlighting(jsonKitHighlight),
-        ]}
-        onCreateEditor={(view) => {
-          requestAnimationFrame(() => {
-            openSearchPanel(view);
-          });
-        }}
-        onChange={(value) => {
-          handleJsonChange(value);
-        }}
-        style={{ flex: 1 }}
-      />
+      >
+        <CodeMirror
+          value={json}
+          theme={theme === "dark" ? dracula : githubLight}
+          height="100%"
+          basicSetup={{
+            lineNumbers: true,
+            highlightActiveLine: true,
+          }}
+          extensions={[
+            jsonLang(),
+            jsonLinter,
+            EditorView.lineWrapping,
+            highlightSelectionMatches(),
+            keymap.of(searchKeymap),
+            jsonKitTheme,
+            syntaxHighlighting(jsonKitHighlight),
+          ]}
+          onCreateEditor={(view) => {
+            requestAnimationFrame(() => {
+              openSearchPanel(view);
+            });
+          }}
+          onChange={(value) => handleJsonChange(value)}
+        />
+      </div>
     </div>
   );
 }

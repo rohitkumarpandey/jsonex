@@ -12,10 +12,12 @@ export default function Page() {
   let parsed = null;
   try {
     parsed = JSON.parse(json);
-  } catch {}
+  } catch {
+    parsed = "{}";
+  }
 
   return (
-    <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+    <div className="jsonkit-container">
       <JsonEditor json={json} handleJsonChange={setJson} />
       <JsonTree data={parsed} />
       <JsonGraph data={parsed} />

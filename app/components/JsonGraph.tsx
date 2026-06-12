@@ -47,8 +47,8 @@ export default function JsonGraph({ data }: Props) {
 
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
-  const [zoom, setZoom] = useState(0.8);
-  const [modalZoom, setModalZoom] = useState(0.9);
+  const [zoom, setZoom] = useState(0.4);
+  const [modalZoom, setModalZoom] = useState(0.4);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -86,13 +86,12 @@ export default function JsonGraph({ data }: Props) {
       <div
         ref={containerRef}
         style={{
-          width: "50%",
-          height: "90vh",
           background: "var(--bg)",
           position: "relative",
-          borderLeft: "1px solid var(--border)",
+          borderLeft: "0.1rem solid var(--border)",
           overflow: "hidden",
         }}
+        className="json-graph-container"
       >
         {/* Controls */}
         <div
@@ -102,12 +101,12 @@ export default function JsonGraph({ data }: Props) {
             right: 10,
             zIndex: 10,
             display: "flex",
-            gap: "6px",
+            gap: "0.6rem",
           }}
         >
           <button className="graph-btn" onClick={() => setZoom((z) => z + 0.2)}>+</button>
-          <button className="graph-btn" onClick={() => setZoom((z) => Math.max(0.3, z - 0.2))}>-</button>
-          <button className="graph-btn" onClick={() => setZoom(0.8)}>Reset</button>
+          <button className="graph-btn" onClick={() => setZoom((z) => Math.max(0.2, z - 0.2))}>-</button>
+          <button className="graph-btn" onClick={() => setZoom(0.4)}>Reset</button>
 
           <button className="graph-btn" onClick={openFullscreen}>
             ⛶
@@ -148,12 +147,12 @@ export default function JsonGraph({ data }: Props) {
               right: 50,
               zIndex: 10,
               display: "flex",
-              gap: "6px",
+              gap: "0.6rem",
             }}
           >
             <button className="graph-btn" onClick={() => setModalZoom((z) => z + 0.2)}>+</button>
             <button className="graph-btn" onClick={() => setModalZoom((z) => Math.max(0.3, z - 0.2))}>-</button>
-            <button className="graph-btn" onClick={() => setModalZoom(0.9)}>Reset</button>
+            <button className="graph-btn" onClick={() => setModalZoom(0.5)}>Reset</button>
           </div>
 
           <Tree
