@@ -3,6 +3,7 @@
 import { dummyJson } from "@/app/components/dummy";
 import JsonEditor from "@/app/components/JsonEditor";
 import JsonGraph from "@/app/components/JsonGraph";
+import JsonGraphFlow from "@/app/components/JsonGraphReactFlow";
 import JsonTree from "@/app/components/JsonTree";
 import { useState } from "react";
 
@@ -20,7 +21,8 @@ export default function Page() {
     <div className="jsonkit-container">
       <JsonEditor json={json} handleJsonChange={setJson} />
       <JsonTree data={parsed} />
-      <JsonGraph data={parsed} />
+      {/* <JsonGraph data={parsed} /> */}
+      <JsonGraphFlow data={parsed} />
     </div>
   );
 }
