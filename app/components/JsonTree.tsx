@@ -155,7 +155,7 @@ export default function JsonTree({ data }: Props) {
   const [matches, setMatches] = useState<string[][]>([]);
   const [index, setIndex] = useState(0);
   const [activePath, setActivePath] = useState("");
-
+  const isEmpty = data === "{}" || typeof data === "object" && data !== null && Object.keys(data).length === 0;
   const [expandedSet, setExpandedSet] = useState<Set<string>>(new Set());
 
   const expandPath = (path: string[]) => {
@@ -217,118 +217,136 @@ export default function JsonTree({ data }: Props) {
         flexDirection: "column",
         background: "var(--bg)",
         fontFamily: "var(--mono)",
+        height: "100%"
       }}
       className="json-tree-container"
     >
-      {/* SEARCH BAR */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.6rem",
-          padding: "0.8rem",
-          borderBottom: "0.1rem solid var(--border)",
-        }}
-      >
-        {/* INPUT (FULL WIDTH FIX) */}
-        <div style={{ position: "relative", flex: 1 }}>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search"
-            style={{
-              width: "100%",
-              fontSize: "1.2rem",
-              padding: "0.6rem 2.6rem 0.6rem 0.8rem",
-              border: "0.1rem solid var(--border)",
-              borderRadius: "0.6rem",
-              background: "var(--bg)",
-              color: "var(--text-h)",
-              outline: "none",
-            }}
-          />
-
-          {/* CLEAR (VERTICAL CENTER FIX) */}
-          {query && (
-            <button
-              onClick={clear}
-              style={{
-                position: "absolute",
-                right: "0.6rem",
-                top: "50%",
-                transform: "translateY(-50%)",
-                width: "1.6rem",
-                height: "1.6rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-                color: "var(--text)",
-                fontSize: "1.2rem",
-                lineHeight: "1",
-              }}
-            >
-              ×
-            </button>
-          )}
+      {isEmpty && (
+        <div className="empty-state">
+          <p className="hint">
+            A JSON tree view that supports search with fuzzy matching. 
+            <br></br>
+            Try pasting a JSON object to get started!
+          </p>
         </div>
+      )}
+      {/* SEARCH BAR */}
 
-        {/* SEARCH */}
-        <button onClick={runSearch} style={iconBtn}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      {!isEmpty &&
+        <>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.6rem",
+              padding: "0.8rem",
+              borderBottom: "0.1rem solid var(--border)",
+            }}
           >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </button>
+            {/* INPUT (FULL WIDTH FIX) */}
+            <div style={{ position: "relative", flex: 1 }}>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search"
+                style={{
+                  width: "100%",
+                  fontSize: "1.2rem",
+                  padding: "0.6rem 2.6rem 0.6rem 0.8rem",
+                  border: "0.1rem solid var(--border)",
+                  borderRadius: "0.6rem",
+                  background: "var(--bg)",
+                  color: "var(--text-h)",
+                  outline: "none",
+                }}
+              />
 
-        {matches && matches.length > 0 && (
-          <>
-            {/* NAV */}
-            <button style={iconBtn} onClick={prev}>↑</button>
-            <button style={iconBtn} onClick={next}>↓</button>
-
-            {/* MATCH COUNT (current/total) */}
-            <div
-              style={{
-                marginLeft: "auto",
-                fontSize: "1.1rem",
-                padding: "0.2rem",
-                borderRadius: "0.6rem",
-                color: "var(--text)",
-                minWidth: "6rem",
-                textAlign: "center",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {matches.length > 0 ? `${index + 1}/${matches.length}` : "0/0"}
+              {/* CLEAR (VERTICAL CENTER FIX) */}
+              {query && (
+                <button
+                  onClick={clear}
+                  style={{
+                    position: "absolute",
+                    right: "0.6rem",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "1.6rem",
+                    height: "1.6rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    color: "var(--text)",
+                    fontSize: "1.2rem",
+                    lineHeight: "1",
+                  }}
+                >
+                  ×
+                </button>
+              )}
             </div>
-          </>
-        )
-        }
-      </div>
 
-      {/* TREE */}
-      <div style={{ overflow: "auto", padding: "0.8rem" }}>
-        <TreeNode
-          value={data}
-          path={[]}
-          activePath={activePath}
-          setActivePath={setActivePath}
-          expandedSet={expandedSet}
-          setExpandedSet={setExpandedSet}
-        />
-      </div>
+            {/* SEARCH */}
+            <button onClick={runSearch} style={iconBtn}>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+
+            {matches && matches.length > 0 && (
+              <>
+                {/* NAV */}
+                <button style={iconBtn} onClick={prev}>↑</button>
+                <button style={iconBtn} onClick={next}>↓</button>
+
+                {/* MATCH COUNT (current/total) */}
+                <div
+                  style={{
+                    marginLeft: "auto",
+                    fontSize: "1.1rem",
+                    padding: "0.2rem",
+                    borderRadius: "0.6rem",
+                    color: "var(--text)",
+                    minWidth: "6rem",
+                    textAlign: "center",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {matches.length > 0 ? `${index + 1}/${matches.length}` : "0/0"}
+                </div>
+              </>
+            )
+            }
+
+          </div>
+        </>}
+      {!isEmpty &&
+        <>
+          {/* TREE */}
+          <div style={{ overflow: "auto", padding: "0.8rem" }}>
+            <TreeNode
+              value={data}
+              path={[]}
+              activePath={activePath}
+              setActivePath={setActivePath}
+              expandedSet={expandedSet}
+              setExpandedSet={setExpandedSet}
+            />
+          </div>
+        </>
+      }
     </div>
   );
 }

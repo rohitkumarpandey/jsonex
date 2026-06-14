@@ -1,61 +1,50 @@
-import { EditorView } from "@codemirror/view";
+const jsonKitThemeSpec ={
+  "&": {
+    color: "var(--text)",
+    backgroundColor: "var(--code-bg)",
+    fontFamily:
+      "var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace)",
+    fontSize: "1.2rem",
+  },
 
-export const jsonKitTheme = EditorView.theme(
-  {
-    "&": {
-      backgroundColor: "var(--bg)",
-      color: "var(--text)",
-      fontFamily: "var(--mono)",
-      fontSize: "13px",
-    },
+  ".cm-content": {
+    caretColor: "var(--accent)",
+  },
 
-    ".cm-content": {
-      caretColor: "var(--accent)",
-    },
+  ".cm-cursor, .cm-dropCursor": {
+    borderLeftColor: "var(--accent)",
+  },
 
-    ".cm-cursor": {
-      borderLeftColor: "var(--accent)",
-    },
+  ".cm-selectionBackground, ::selection": {
+    backgroundColor: "var(--accent-bg)",
+  },
 
-    ".cm-selectionBackground, .cm-selectionMatch": {
+  ".cm-activeLine": {
+    backgroundColor: "rgba(255,255,255,0.03)",
+  },
+
+  ".cm-gutters": {
+    backgroundColor: "var(--bg)",
+    color: "var(--text)",
+    border: "none",
+  },
+
+  ".cm-lineNumbers .cm-gutterElement": {
+    color: "var(--text)",
+    opacity: 0.4,
+  },
+
+  ".cm-tooltip": {
+    backgroundColor: "var(--bg)",
+    border: "1px solid var(--border)",
+    color: "var(--text)",
+  },
+
+  ".cm-tooltip-autocomplete": {
+    "& > ul > li[aria-selected]": {
       backgroundColor: "var(--accent-bg)",
-    },
-
-    ".cm-activeLine": {
-      backgroundColor: "rgba(0,0,0,0.03)",
-    },
-
-    ".cm-gutters": {
-      backgroundColor: "var(--bg)",
-      color: "var(--text)",
-      borderRight: "1px solid var(--border)",
-    },
-
-    ".cm-activeLineGutter": {
-      backgroundColor: "var(--accent-bg)",
-    },
-
-    ".cm-lineNumbers": {
-      color: "var(--text)",
-    },
-
-    ".cm-matchingBracket": {
-      backgroundColor: "var(--accent-bg)",
-      outline: "1px solid var(--accent-border)",
       color: "var(--text-h)",
-    },
-
-    ".cm-foldPlaceholder": {
-      backgroundColor: "var(--accent-bg)",
-      border: "1px solid var(--accent-border)",
-      color: "var(--text-h)",
-    },
-
-    ".cm-tooltip": {
-      backgroundColor: "var(--code-bg)",
-      color: "var(--text-h)",
-      border: "1px solid var(--border)",
     },
   },
-  { dark: false }
-);
+}
+export default jsonKitThemeSpec;

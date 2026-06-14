@@ -109,6 +109,66 @@ h1 {
   margin: 3.2rem 0;
 }
 
+.react-flow__controls {
+  background-color: var(--code-bg) !important;
+  border: 0.1rem solid var(--border) !important;
+}
+
+.react-flow__controls-button {
+  background-color: var(--bg) !important;
+  border: 0.1rem solid var(--border) !important;
+}
+
+.react-flow__controls-button>svg {
+  fill: var(--text) !important;
+}
+
+.react-flow__controls-button[title="toggle interactivity"] {
+  display: none;
+}
+
+.react-flow__attribution {
+  background-color: var(--code-bg) !important;
+}
+
+.react-flow__attribution>a {
+  color: yellow !important;
+}
+
+.json-graph-search {
+  position: absolute;
+  top: 10;
+  left: 10;
+  z-index: 10;
+  width: 40%;
+}
+
+.json-graph-search input {
+  padding: 0.4rem;
+  border: 0.2rem solid var(--border);
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  width: 100% !important;
+  color: var(--text-h);
+}
+
+.json-graph-search-item {
+  padding: 0.4rem;
+  border-bottom: 0.1rem solid var(--border);
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.json-graph-search-item:hover {
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
+
+.json-graph-search input::placeholder {
+  color: var(--text-h);
+  opacity: 0.6;
+}
+
 @media (max-width: 1024px) {
   h1 {
     font-size: 3.6rem;
@@ -154,19 +214,23 @@ h2 {
 }
 
 /* BUTTONS */
-.graph-btn {
+.graph-btn,
+.btn {
   background: var(--code-bg);
   color: var(--text);
   border: 0.1rem solid var(--border);
   padding: 0.4rem 0.8rem;
   cursor: pointer;
   font-size: 1.2rem;
+  border-radius: 0.4rem;
 }
 
-.graph-btn:hover {
+.graph-btn:hover,
+.btn:hover {
   background: var(--accent-bg);
   color: var(--text-h);
   border-color: var(--accent-border);
+  scale: 1.02;
 }
 
 /* MODAL */
@@ -265,7 +329,7 @@ h2 {
 .json-tree-container,
 .json-graph-container {
   width: 28%;
-  min-height: 50vh !important;
+  min-height: 89vh !important;
   max-height: 90vh !important;
   border-left: .1rem solid var(--border) !important;
   border-right: .1rem solid var(--border) !important;
@@ -273,6 +337,23 @@ h2 {
 
 .json-graph-container {
   width: 44%;
+}
+
+.empty-state {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100% !important;
+  color: var(--text);
+}
+
+.hint {
+  text-align: center;
+  line-height: 1.5rem;
+  opacity: 0.8;
+  font-size: 1rem;
+  max-width: 64%;
 }
 
 /* Mobile (up to 767px) */
@@ -295,7 +376,8 @@ h2 {
     max-height: 64vh !important;
     border: .1rem solid var(--border) !important;
   }
-  .json-graph-container  .rd3t-tree-container {
+
+  .json-graph-container .react-flow {
     height: 64vh !important;
   }
 
@@ -324,7 +406,8 @@ h2 {
     max-height: 64vh !important;
     border: .1rem solid var(--border) !important;
   }
-  .json-graph-container  .rd3t-tree-container {
+
+  .json-graph-container .react-flow {
     height: 64vh !important;
   }
 

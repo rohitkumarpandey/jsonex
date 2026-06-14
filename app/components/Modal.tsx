@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { type ReactNode, useEffect } from "react";
 
 type Props = {
@@ -32,7 +33,7 @@ export default function Modal({ isOpen, onClose, children }: Props) {
       >
         {/* Close button */}
         <button className="modal-close" onClick={onClose}>
-          ✕
+        <X size={18} />
         </button>
 
         {children}
