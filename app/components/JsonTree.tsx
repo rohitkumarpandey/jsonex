@@ -82,7 +82,8 @@ function TreeNode({
       >
         {name && <span style={{ color: "var(--accent)" }}>{name}: </span>}
         <span style={{ color: "var(--text-h)" }}>
-          {str.length > 30 ? str.slice(0, 30) + "..." : str}
+          {/* {str.length > 30 ? str.slice(0, 30) + "..." : str} */}
+          {str}
         </span>
       </div>
     );

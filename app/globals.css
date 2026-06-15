@@ -27,7 +27,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
@@ -46,7 +46,7 @@
   #social .button-icon {
     filter: invert(1) brightness(2);
   }
-}
+} */
 
 /* Light theme */
 :root {
@@ -66,6 +66,14 @@
   --accent: #c084fc;
   --accent-bg: rgba(192, 132, 252, 0.15);
   --accent-border: rgba(192, 132, 252, 0.5);
+}
+
+[data-them="light"] {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: red;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
 }
 
 :root {
@@ -215,7 +223,7 @@ h2 {
 
 /* BUTTONS */
 .graph-btn,
-.btn {
+.toolbar .toolbar-btn {
   background: var(--code-bg);
   color: var(--text);
   border: 0.1rem solid var(--border);
@@ -224,9 +232,13 @@ h2 {
   font-size: 1.2rem;
   border-radius: 0.4rem;
 }
+.toolbar .toolbar-btn svg {
+  width: 1rem;
+  height: 1.6rem;
+}
 
 .graph-btn:hover,
-.btn:hover {
+.toolbar .toolbar-btn:hover {
   background: var(--accent-bg);
   color: var(--text-h);
   border-color: var(--accent-border);
@@ -335,6 +347,10 @@ h2 {
   border-right: .1rem solid var(--border) !important;
 }
 
+.json-tree-container {
+  width: 24%;
+}
+
 .json-graph-container {
   width: 44%;
 }
@@ -377,6 +393,9 @@ h2 {
     border: .1rem solid var(--border) !important;
   }
 
+  .json-editor-container {
+    height: 54vh !important;
+  }
   .json-graph-container .react-flow {
     height: 64vh !important;
   }
@@ -407,6 +426,10 @@ h2 {
     border: .1rem solid var(--border) !important;
   }
 
+  .json-editor-container {
+    height: 54vh !important;
+  }
+
   .json-graph-container .react-flow {
     height: 64vh !important;
   }
@@ -414,4 +437,73 @@ h2 {
   .container {
     padding: 2.4rem;
   }
+}
+
+.editor-widget .find-widget .reduced-find-widget .visible {
+  right: 8px !important;
+}
+
+.json-editor-container .tabs {
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  padding: 4px;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.json-editor-container .tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+.json-editor-container  .tab.active {
+  background: var(--accent-bg);
+  color: var(--text-h) !important;
+  font-weight: 700 !important;
+}
+
+.json-editor-container  .add-tab {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.json-editor-container .toolbar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.json-editor-container .toast {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-bg);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.monaco-editor .find-widget>.button.codicon-widget-close {
+  right: 0.6rem !important;
+}
+
+.monaco-editor .find-widget.visible  {
+  top: 0.6rem !important;
+}
+
+.iPadShowKeyboard {
+  display: none !important;
 }

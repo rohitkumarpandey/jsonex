@@ -6,7 +6,7 @@ import { Sun, Moon } from "lucide-react";
 
 export default function Header() {
   const router = useRouter();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // load saved theme
   useEffect(() => {
@@ -16,21 +16,23 @@ export default function Header() {
       | null;
 
     const initial =
-      saved ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
 
-    setTheme(initial);
+      saved ||
+
+      document.documentElement.getAttribute("data-theme") ||
+
+      "dark";
+    const themeToSet = initial === "dark" ? "dark" : "light";
+    setTheme(themeToSet);
     document.documentElement.setAttribute("data-theme", initial);
+    localStorage.setItem("theme", themeToSet);
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
-
-    setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
+    setTheme(newTheme);
   };
 
   return (
@@ -66,15 +68,15 @@ export default function Header() {
       {/* Actions */}
       <div style={{ display: "flex", gap: "1.2rem", alignItems: "center" }}>
         {/* Theme Toggle */}
-        {/* <button
+        <button
           onClick={toggleTheme}
-          className="graph-btn"
           title="Toggle theme"
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "6rem 10rem",
+            padding: "0.6rem 1rem",
+            cursor: "pointer",
           }}
         >
           {theme === "dark" ? (
@@ -82,7 +84,7 @@ export default function Header() {
           ) : (
             <Moon size={16} />
           )}
-        </button> */}
+        </button>
       </div>
     </header>
   );
