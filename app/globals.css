@@ -152,10 +152,10 @@ h1 {
 }
 
 .json-graph-search input {
-  padding: 0.4rem;
+  padding: 0.2rem 0.6rem;
   border: 0.2rem solid var(--border);
   border-radius: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   width: 100% !important;
   color: var(--text-h);
 }
@@ -173,8 +173,8 @@ h1 {
 }
 
 .json-graph-search input::placeholder {
-  color: var(--text-h);
-  opacity: 0.6;
+  color: var(--text);
+  opacity: 0.8;
 }
 
 @media (max-width: 1024px) {

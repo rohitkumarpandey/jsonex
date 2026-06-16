@@ -167,12 +167,13 @@ function GraphView({
           background: isActive
             ? "var(--accent-bg)"
             : "var(--code-bg)",
-          color: isActive ? "var(--text-h)" : "var(--text)",
+          color: "var(--text-h)",
           border: isActive
             ? "1.5px solid var(--accent)"
-            : "1px solid var(--border)",
-          opacity: hasSelection && !isActive ? 0.5 : 1,
+            : "0.5px solid var(--text)",
+          opacity: hasSelection && !isActive ? 0.8 : 1,
           cursor: "pointer",
+          fontWeight: isActive ? "700" : "600",
         },
       };
     });
@@ -188,7 +189,7 @@ function GraphView({
         ...edge,
         style: {
           stroke: isActive ? "var(--accent)" : "var(--border)",
-          strokeWidth: isActive ? 2.2 : 1.5,
+          strokeWidth: isActive ? 2.2 : 2,
           opacity: 1,
         },
       };
@@ -220,7 +221,9 @@ function GraphView({
             {filteredNodes.slice(0, 10).map((n: Node) => (
               <div
                 key={n.id}
-                onClick={() => selectNode(n.id)}
+                onClick={() => { 
+                  selectNode(n.id)
+                  setSearch("")}}
                 className="json-graph-search-item"
               >
                 {n.data.label}
