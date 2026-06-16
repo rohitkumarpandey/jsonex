@@ -152,10 +152,10 @@ h1 {
 }
 
 .json-graph-search input {
-  padding: 0.4rem;
+  padding: 0.2rem 0.6rem;
   border: 0.2rem solid var(--border);
   border-radius: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   width: 100% !important;
   color: var(--text-h);
 }
@@ -173,8 +173,8 @@ h1 {
 }
 
 .json-graph-search input::placeholder {
-  color: var(--text-h);
-  opacity: 0.6;
+  color: var(--text);
+  opacity: 0.8;
 }
 
 @media (max-width: 1024px) {
@@ -346,7 +346,9 @@ h2 {
   border-left: .1rem solid var(--border) !important;
   border-right: .1rem solid var(--border) !important;
 }
-
+.json-editor-container {
+  max-width: 64%;
+}
 .json-tree-container {
   width: 24%;
 }
@@ -394,6 +396,7 @@ h2 {
   }
 
   .json-editor-container {
+    max-width: 100%;
     height: 54vh !important;
   }
   .json-graph-container .react-flow {
@@ -427,6 +430,7 @@ h2 {
   }
 
   .json-editor-container {
+    max-width: 100%;
     height: 54vh !important;
   }
 
@@ -479,8 +483,8 @@ h2 {
 
 .json-editor-container .toolbar {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 0.8rem;
+  right: 1.2rem;
   z-index: 10;
   display: flex;
   gap: 0.6rem;
@@ -497,7 +501,8 @@ h2 {
 }
 
 .monaco-editor .find-widget>.button.codicon-widget-close {
-  right: 0.6rem !important;
+  top: 0.8rem !important; 
+  right: 0.8rem !important;
 }
 
 .monaco-editor .find-widget.visible  {
