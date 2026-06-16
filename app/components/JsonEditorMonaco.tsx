@@ -26,15 +26,21 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const editorRef = useRef<any>(null);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isResizing = useRef(false);
+
+    const [width, setWidth] = useState(32);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const SNAP_POINTS = [30, 40, 50, 64];
+
     const [tabs, setTabs] = useState<Tab[]>([
         { id: "1", name: "Tab 1", json: json || "" },
     ]);
     const [activeTab, setActiveTab] = useState("1");
 
     const activeTabData = tabs.find((t) => t.id === activeTab)!;
-
     const [isEmpty, setIsEmpty] = useState(!json || json.trim() === "");
-
 
     const showToast = (msg: string) => {
         setToast(msg);
@@ -63,11 +69,56 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
 
         return () => observer.disconnect();
     }, []);
+
     useEffect(() => {
         const current =
             document.documentElement.getAttribute("data-theme") || "dark";
         setTheme(current === "dark" ? "vs-dark" : "light");
     }, [json]);
+
+    // ✅ GLOBAL RESIZE
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isResizing.current || !containerRef.current) return;
+
+            const parentWidth =
+                containerRef.current.parentElement?.offsetWidth || 1;
+
+            const newWidthPx =
+                e.clientX - containerRef.current.getBoundingClientRect().left;
+
+            let newPercent = (newWidthPx / parentWidth) * 100;
+
+            // clamp
+            newPercent = Math.max(30, Math.min(50, newPercent));
+
+            setWidth(newPercent);
+        };
+
+        const handleMouseUp = () => {
+            if (!isResizing.current) return;
+
+            isResizing.current = false;
+            setIsDragging(false);
+
+            // snap to nearest
+            const closest = SNAP_POINTS.reduce((prev, curr) =>
+                Math.abs(curr - width) < Math.abs(prev - width) ? curr : prev
+            );
+            setWidth(closest);
+
+            document.body.style.cursor = "default";
+            document.body.style.userSelect = "auto";
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseup", handleMouseUp);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [width]);
 
     const updateJson = (value: string) => {
         setTabs((prev) =>
@@ -116,7 +167,6 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
         }
     };
 
-    /* 🧹 Clear current tab */
     const handleClear = () => {
         updateJson("");
         showToast("Cleared ✅");
@@ -168,18 +218,56 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
         }
     };
 
+    const startResize = () => {
+        isResizing.current = true;
+        setIsDragging(true);
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+    };
+
+    const resetWidth = () => {
+        setWidth(32);
+    };
+
     return (
         <div
+            ref={containerRef}
             style={{
                 display: "flex",
                 flexDirection: "column",
                 fontSize: "1.2rem",
                 position: "relative",
                 overflow: "hidden",
-                width: "32%",
+                minWidth: "30%",
+                width: `${width}%`,
+                transition: isDragging ? "none" : "width 0.2s ease",
             }}
             className="json-editor-container"
         >
+            {/* RESIZER */}
+            <div
+                onMouseDown={startResize}
+                onDoubleClick={resetWidth}
+                style={{
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    width: "6px",
+                    height: "100%",
+                    cursor: "col-resize",
+                    zIndex: 10,
+                    background: isDragging ? "rgba(0,0,0,0.15)" : "transparent",
+                }}
+                onMouseEnter={(e) => {
+                    if (!isDragging)
+                        e.currentTarget.style.background = "rgba(0,0,0,0.1)";
+                }}
+                onMouseLeave={(e) => {
+                    if (!isDragging)
+                        e.currentTarget.style.background = "transparent";
+                }}
+            />
+
             {/* Tabs */}
             <div className="tabs">
                 {tabs.map((tab) => (
@@ -229,9 +317,7 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
                     <button onClick={handleCopy} className="toolbar-btn">
                         <Copy size={16} />
                     </button>
-
-                    {/* 🧹 Clear Button */}
-                    <button onClick={handleClear} className="toolbar-btn" title="Clear">
+                    <button onClick={handleClear} className="toolbar-btn">
                         Clear
                     </button>
                 </div>
