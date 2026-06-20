@@ -1,5 +1,6 @@
 {
-  "name": "jsonkit",
+  "name": "jasonify",
+  "displayName": "JSON Explorer",
   "version": "0.1.0",
   "private": true,
   "scripts": {

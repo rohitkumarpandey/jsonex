@@ -34,7 +34,7 @@ export default function LandingPage() {
             marginBottom: "0.8rem",
           }}
         >
-          JSONKit
+          JSONex
         </h1>
 
         {/* TAGLINE */}
@@ -47,7 +47,7 @@ export default function LandingPage() {
             marginBottom: "1.8rem",
           }}
         >
-          Made for the developer, by the developer
+          Made for the developers, by the developer
         </div>
 
         <p
@@ -66,7 +66,7 @@ export default function LandingPage() {
         </p>
 
         <a
-          href="/jsonkit"
+          href="/json-explorer"
           style={{
             padding: "1.4rem 2.6rem",
             fontSize: "1.5rem",
@@ -80,7 +80,7 @@ export default function LandingPage() {
             display: "inline-block",
           }}
         >
-          Open JSONKit
+          Open Explorer
         </a>
       </div>
 
@@ -156,7 +156,7 @@ export default function LandingPage() {
         </h2>
 
         <p style={{ lineHeight: "1.7", fontSize: "1.4rem" }}>
-          JSONKit helps developers understand complex API responses, logs,
+          JSON Explorer helps developers understand complex API responses, logs,
           configuration files, and nested data structures. Whether you are
           debugging backend services or inspecting frontend payloads, it gives
           you instant clarity through multiple visualization modes.

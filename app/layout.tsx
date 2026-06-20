@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import BookmarkPopup from "./components/Bookmark";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JSONKit | Developer-first JSON tool",
+  title: "JSON Explorer | Developer-first JSON tool",
   description: "Developer-first JSON tool",
 };
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <SpeedInsights />
         <Header />
         <div className="flex-1">{children}</div>
+        <BookmarkPopup/>
         <Footer />
       </body>
     </html>
