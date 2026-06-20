@@ -331,7 +331,7 @@ h2 {
   stroke-width: 2px;
 }
 
-.jsonkit-container {
+.json-explorer-container {
   display: flex;
   gap: 1rem;
   padding: 1rem;
@@ -381,7 +381,7 @@ h2 {
     /* 1rem = 9px */
   }
 
-  .jsonkit-container {
+  .json-explorer-container {
     flex-direction: column;
     gap: 2.4rem;
   }
@@ -415,7 +415,7 @@ h2 {
     /* 1rem = 10px */
   }
 
-  .jsonkit-container {
+  .json-explorer-container {
     flex-direction: column;
     gap: 2.4rem;
   }

@@ -19,7 +19,7 @@ export default function Footer() {
     >
       {/* LEFT */}
       <div style={{ opacity: 0.8 }}>
-        © {new Date().getFullYear()} JSONKit
+        © {new Date().getFullYear()} JSON Explorer
       </div>
 
       {/* RIGHT LINKS */}
@@ -38,6 +38,14 @@ export default function Footer() {
           style={linkStyle}
         >
           GitHub
+        </a>
+        <a
+          href="/change-log"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={linkStyle}
+        >
+          Change Log
         </a>
 
         <a

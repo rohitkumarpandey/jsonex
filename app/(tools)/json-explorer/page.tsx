@@ -17,7 +17,7 @@ export default function Page() {
   }
 
   return (
-    <div className="jsonkit-container">
+    <div className="json-explorer-container">
       {/* <JsonEditor json={json} handleJsonChange={setJson} /> */}
       <JsonEditorMonaco json={json} handleJsonChange={setJson} />
       <JsonTree data={parsed} />

@@ -62,13 +62,13 @@ export default function Header() {
           fontSize: "2.4rem",
         }}
       >
-        JSONKit
+        JSONex
       </div>
 
       {/* Actions */}
       <div style={{ display: "flex", gap: "1.2rem", alignItems: "center" }}>
         {/* Theme Toggle */}
-        <button
+        {/* <button
           onClick={toggleTheme}
           title="Toggle theme"
           style={{
@@ -84,7 +84,7 @@ export default function Header() {
           ) : (
             <Moon size={16} />
           )}
-        </button>
+        </button> */}
       </div>
     </header>
   );
