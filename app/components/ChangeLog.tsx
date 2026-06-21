@@ -6,7 +6,7 @@ type Change = {
     date: string;
     title: string;
     items: {
-        type: "added" | "improved" | "fixed";
+        type: "added" | "improved" | "fixed" | "addition" | "improvement";
         text: string;
     }[];
     upcoming?: boolean;
@@ -18,26 +18,15 @@ const changelog: Change[] = [
         title: "Upcoming Features",
         upcoming: true,
         items: [
-            { type: "added", text: "JSON diff viewer" },
-            { type: "added", text: "API request tester" },
-            { type: "added", text: "Save & share snippets" },
-        ],
-    },
-    {
-        date: "Jun 18, 2026",
-        title: "UI Enhancements",
-        items: [
-            { type: "improved", text: "Dark theme improvements" },
-            { type: "fixed", text: "Scrollbar issue in editor" },
+            { type: "addition", text: "JSON diff viewer" },
+            {type: "improvement", text: "Performance optimizations for large JSON files"},
         ],
     },
     {
         date: "Jun 20, 2026",
         title: "Initial Release",
         items: [
-            { type: "added", text: "JSON editor with syntax highlighting" },
-            { type: "added", text: "Search and replace functionality" },
-            { type: "improved", text: "Performance optimizations" },
+            { type: "added", text: "JSON editor, JSON Tree and JSON Graph" },
         ],
     }
 ];
@@ -45,8 +34,10 @@ const changelog: Change[] = [
 const getTypeColor = (type: string) => {
     switch (type) {
         case "added":
+        case "addition":
             return "var(--accent)";
         case "improved":
+        case "improvement":
             return "#38bdf8";
         case "fixed":
             return "#f87171";

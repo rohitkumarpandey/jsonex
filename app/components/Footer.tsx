@@ -13,7 +13,7 @@ export default function Footer() {
         justifyContent: "space-between",
         alignItems: "center",
         fontSize: "1.2rem",
-        color: "var(--text)",
+        color: "var(--text-h)",
         background: "var(--bg)",
       }}
     >
@@ -24,15 +24,15 @@ export default function Footer() {
 
       {/* RIGHT LINKS */}
       <div style={{ display: "flex", gap: "1.4rem", alignItems: "center" }}>
-        <a
+        {/* <a
           href="/docs"
           style={linkStyle}
         >
           Docs
-        </a>
+        </a> */}
 
         <a
-          href="https://github.com"
+          href="https://github.com/rohitkumarpandey/jsonex"
           target="_blank"
           rel="noopener noreferrer"
           style={linkStyle}
@@ -41,7 +41,6 @@ export default function Footer() {
         </a>
         <a
           href="/change-log"
-          target="_blank"
           rel="noopener noreferrer"
           style={linkStyle}
         >
@@ -60,7 +59,7 @@ export default function Footer() {
 }
 
 const linkStyle: React.CSSProperties = {
-  color: "var(--text)",
+  color: "var(--text-h)",
   textDecoration: "none",
   opacity: 0.8,
   transition: "0.2s ease",
