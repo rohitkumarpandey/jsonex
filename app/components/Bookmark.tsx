@@ -10,6 +10,15 @@ export default function BookmarkPopup() {
   useEffect(() => {
     const dismissed = localStorage.getItem("bookmark-dismissed");
 
+    // ✅ Detect mobile/tablet
+    const isMobile =
+      /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      window.innerWidth < 768;
+
+    // 🚫 Do NOT show on mobile/tablet
+    if (isMobile) return;
+
+    // ✅ Only desktop/laptop continues
     if (!dismissed) {
       setTimeout(() => setVisible(true), 2000);
     }
@@ -44,12 +53,9 @@ export default function BookmarkPopup() {
 
         <div className="hint">
           <div>
-            <strong>{platform}:</strong>{" "}
-            <span>{shortcut}</span>
+            <strong>{platform}:</strong> <span>{shortcut}</span>
           </div>
-          <div className="alt">
-            Or use your browser’s ⭐ icon
-          </div>
+          <div className="alt">Or use your browser’s ⭐ icon</div>
         </div>
 
         <div className="actions">

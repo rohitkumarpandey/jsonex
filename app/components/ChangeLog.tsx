@@ -3,87 +3,110 @@
 import React from "react";
 
 type Change = {
-    date: string;
-    title: string;
-    items: {
-        type: "added" | "improved" | "fixed" | "addition" | "improvement";
-        text: string;
-    }[];
-    upcoming?: boolean;
+  date: string;
+  title: string;
+  items: {
+    type: "added" | "improved" | "fixed" | "addition" | "improvement";
+    text: string;
+  }[];
+  upcoming?: boolean;
 };
 
 const changelog: Change[] = [
-    {
-        date: "Coming Soon",
-        title: "Upcoming Features",
-        upcoming: true,
-        items: [
-            { type: "addition", text: "JSON diff viewer" },
-            {type: "improvement", text: "Performance optimizations for large JSON files"},
-        ],
-    },
-    {
-        date: "Jun 20, 2026",
-        title: "Initial Release",
-        items: [
-            { type: "added", text: "JSON editor, JSON Tree and JSON Graph" },
-        ],
-    }
+  {
+    date: "Coming Soon",
+    title: "Upcoming Features",
+    upcoming: true,
+    items: [
+      { type: "addition", text: "JSON diff viewer" },
+      { type: "addition", text: "Setting theme" },
+      {
+        type: "improvement",
+        text: "Performance optimizations for large JSON files",
+      },
+    ],
+  },
+  {
+    date: "Jun 20, 2026",
+    title: "Initial Release",
+    items: [
+      { type: "added", text: "JSON editor, JSON Tree and JSON Graph" },
+    ],
+  },
 ];
 
 const getTypeColor = (type: string) => {
-    switch (type) {
-        case "added":
-        case "addition":
-            return "var(--accent)";
-        case "improved":
-        case "improvement":
-            return "#38bdf8";
-        case "fixed":
-            return "#f87171";
-        default:
-            return "var(--text)";
-    }
+  switch (type) {
+    case "added":
+    case "addition":
+      return "var(--accent)";
+    case "improved":
+    case "improvement":
+      return "#38bdf8";
+    case "fixed":
+      return "#f87171";
+    default:
+      return "var(--text)";
+  }
 };
 
 export default function ChangelogTimeline() {
-    return (
-        <div className="timeline">
-            {changelog.map((entry, index) => (
-                <div key={index} className="timeline-item">
-                    {/* Timeline line */}
-                    <div className="timeline-left">
-                        <div
-                            className={`dot ${entry.upcoming ? "blinking" : ""}`}
-                        />
-                        {index !== changelog.length - 1 && <div className="line" />}
-                    </div>
+  return (
+    <div className="timeline-wrapper">
+      <div className="timeline">
+        {changelog.map((entry, index) => (
+          <div key={index} className="timeline-item">
+            {/* Left line */}
+            <div className="timeline-left">
+              <div
+                className={`dot ${entry.upcoming ? "blinking" : ""}`}
+              />
+              {index !== changelog.length - 1 && (
+                <div className="line" />
+              )}
+            </div>
 
-                    {/* Content */}
-                    <div className="timeline-content">
-                        <div className="date">{entry.date}</div>
-                        <div className="title">{entry.title}</div>
+            {/* Content */}
+            <div className="timeline-content">
+              <div className="date">{entry.date}</div>
+              <div className="title">{entry.title}</div>
 
-                        <ul>
-                            {entry.items.map((item, i) => (
-                                <li key={i}>
-                                    <span
-                                        className="badge"
-                                        style={{ color: getTypeColor(item.type) }}
-                                    >
-                                        {item.type}
-                                    </span>
-                                    {item.text}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            ))}
+              <ul>
+                {entry.items.map((item, i) => (
+                  <li key={i}>
+                    <span
+                      className="badge"
+                      style={{ color: getTypeColor(item.type) }}
+                    >
+                      {item.type}
+                    </span>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
+        /* WRAPPER (Responsive alignment fix) */
+        .timeline-wrapper {
+          width: 90%;
+          padding: 20px 0;
+          margin-left: 1.6rem;
+        }
+
+        /* Center ONLY on large screens */
+        @media (min-width: 1024px) {
+          .timeline-wrapper {
+            margin: 0 auto;
+            max-width: 800px;
+          }
+        }
+
         .timeline {
-          padding: 20px;
+          width: 100%;
         }
 
         .timeline-item {
@@ -97,13 +120,15 @@ export default function ChangelogTimeline() {
           flex-direction: column;
           align-items: center;
         }
-
         .dot {
-          width: 12px;
-          height: 12px;
+          width: 1.6rem;
+          height: 1.6rem;
           border-radius: 50%;
           background: var(--accent);
           border: 2px solid var(--accent-border);
+        }
+        .dot.blinking {
+          background: var(--border);
         }
 
         .blinking {
@@ -170,9 +195,9 @@ export default function ChangelogTimeline() {
         .badge {
           font-weight: 600;
           text-transform: capitalize;
-          min-width: 70px;
+          min-width: 80px;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
