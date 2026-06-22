@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BookmarkPopup from "./components/Bookmark";
+import FeedbackForm from "./components/Feedback";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -47,7 +48,7 @@ export default function RootLayout({
         <Header />
         <div className="flex-1">{children}</div>
         <BookmarkPopup/>
-        <Footer />
+        <Footer /> 
       </body>
     </html>
   );
