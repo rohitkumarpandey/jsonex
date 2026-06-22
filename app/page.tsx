@@ -1,3 +1,5 @@
+import { CornerDownRight } from "lucide-react";
+
 export default function LandingPage() {
   return (
     <div
@@ -69,7 +71,7 @@ export default function LandingPage() {
           href="/json-explorer"
           style={{
             padding: "1.4rem 2.6rem",
-            fontSize: "1.5rem",
+            fontSize: "2.4rem",
             borderRadius: "1rem",
             border: "0.1rem solid var(--accent-border)",
             background: "var(--accent-bg)",
@@ -77,10 +79,13 @@ export default function LandingPage() {
             cursor: "pointer",
             fontWeight: 600,
             transition: "0.2s ease",
-            display: "inline-block",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.8rem",
           }}
         >
           Open Explorer
+          <CornerDownRight size={18} />
         </a>
       </div>
 

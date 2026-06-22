@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { Braces, Copy, Download, Upload, Search, X, Plus } from "lucide-react";
+import { Braces, Copy, Download, Upload, Search, X, Plus, GripVertical } from "lucide-react";
 import type * as monaco from "monaco-editor";
 
 const Editor = dynamic(() => import("@monaco-editor/react"), {
@@ -41,6 +41,7 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
 
     const activeTabData = tabs.find((t) => t.id === activeTab)!;
     const [isEmpty, setIsEmpty] = useState(!json || json.trim() === "");
+    const [tabCounter, setTabCounter] = useState(1);
 
     const showToast = (msg: string) => {
         setToast(msg);
@@ -140,14 +141,17 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
     const addTab = () => {
         const id = Date.now().toString();
 
+        const nextNumber = tabCounter + 1;
+
         const newTab = {
             id,
-            name: `Tab ${tabs.length + 1}`,
+            name: `Tab ${nextNumber}`,
             json: "",
         };
 
         setTabs((prev) => [...prev, newTab]);
         setActiveTab(id);
+        setTabCounter(nextNumber);
 
         handleJsonChange("");
         setIsEmpty(true);
@@ -247,16 +251,28 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
             {/* RESIZER */}
             <div
                 onMouseDown={startResize}
-                onDoubleClick={resetWidth}
                 style={{
                     position: "absolute",
+
                     right: 0,
+
                     top: 0,
-                    width: "6px",
+
+                    width: "16px", // slightly bigger hit area
+
                     height: "100%",
+
                     cursor: "col-resize",
+
                     zIndex: 10,
+
                     background: isDragging ? "rgba(0,0,0,0.15)" : "transparent",
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
                 }}
                 onMouseEnter={(e) => {
                     if (!isDragging)
@@ -266,7 +282,15 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
                     if (!isDragging)
                         e.currentTarget.style.background = "transparent";
                 }}
-            />
+            >
+                <GripVertical
+                    size={48}
+                    style={{
+                        opacity: isDragging ? 1 : 0.8,
+                        pointerEvents: "none"
+                    }}
+                />
+            </div>
 
             {/* Tabs */}
             <div className="tabs">
@@ -278,7 +302,8 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
                     >
                         {tab.name}
                         <X
-                            size={14}
+                            className="tab-close"
+                            size={12}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 closeTab(tab.id);
@@ -287,7 +312,7 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
                     </div>
                 ))}
                 <button className="add-tab" onClick={addTab}>
-                    <Plus size={16} />
+                    <Plus size={12} />
                 </button>
             </div>
 

@@ -159,6 +159,10 @@ h1 {
   width: 100% !important;
   color: var(--text-h);
 }
+input:focus {
+  border-color: var(--accent) !important;
+  outline: none;
+}
 
 .json-graph-search-item {
   padding: 0.4rem;
@@ -224,14 +228,15 @@ h2 {
 /* BUTTONS */
 .graph-btn,
 .toolbar .toolbar-btn {
-  background: var(--code-bg);
-  color: var(--text);
+  background: transparent;
+  color: var(--text-h);
   border: 0.1rem solid var(--border);
   padding: 0.4rem 0.8rem;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 0.4rem;
 }
+
 .toolbar .toolbar-btn svg {
   width: 1rem;
   height: 1.6rem;
@@ -242,7 +247,8 @@ h2 {
   background: var(--accent-bg);
   color: var(--text-h);
   border-color: var(--accent-border);
-  scale: 1.02;
+  scale: 1.2;
+  font-weight: 700;
 }
 
 /* MODAL */
@@ -346,9 +352,11 @@ h2 {
   border-left: .1rem solid var(--border) !important;
   border-right: .1rem solid var(--border) !important;
 }
+
 .json-editor-container {
   max-width: 64%;
 }
+
 .json-tree-container {
   width: 24%;
 }
@@ -399,6 +407,7 @@ h2 {
     max-width: 100%;
     height: 54vh !important;
   }
+
   .json-graph-container .react-flow {
     height: 64vh !important;
   }
@@ -451,7 +460,7 @@ h2 {
   display: flex;
   align-items: center;
   background: var(--bg-secondary);
-  padding: 4px;
+  padding: 0.6rem 0.4rem;
   gap: 4px;
   overflow-x: auto;
 }
@@ -464,22 +473,32 @@ h2 {
   cursor: pointer;
   background: var(--bg);
   border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.json-editor-container  .tab.active {
+.json-editor-container .tab.active {
   background: var(--accent-bg);
   color: var(--text-h) !important;
   font-weight: 700 !important;
 }
 
-.json-editor-container  .add-tab {
+.json-editor-container .add-tab {
   background: transparent;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 4px;
+  padding: 0.2rem;
 }
+
+.json-editor-container .add-tab:hover {
+  background: var(--accent-bg);
+  border-radius: 50%;
+  scale: 1.1 !important;
+  font-size: 1.6rem !important;
+}
+
 
 .json-editor-container .toolbar {
   position: absolute;
@@ -501,11 +520,11 @@ h2 {
 }
 
 .monaco-editor .find-widget>.button.codicon-widget-close {
-  top: 0.8rem !important; 
-  right: 0.8rem !important;
+  top: 0.8rem !important;
+  right: 1rem !important;
 }
 
-.monaco-editor .find-widget.visible  {
+.monaco-editor .find-widget.visible {
   top: 0.6rem !important;
 }
 

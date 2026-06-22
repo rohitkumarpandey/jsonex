@@ -17,7 +17,6 @@ import { Braces, Copy, Download, Upload } from "lucide-react";
 /* ✅ NEW: CodeMirror theme matching your CSS variables */
 import { EditorView as CMView } from "@codemirror/view";
 import { HighlightStyle } from "@codemirror/language";
-import { tags as t } from "@lezer/highlight";
 import jsonKitThemeSpec from "../theme/codeMirror.theme";
 import { codeMirrorSyntaxTheme } from "../theme/code-mirror-syntax.theme";
 

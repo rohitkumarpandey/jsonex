@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   data: any;
@@ -158,7 +158,20 @@ export default function JsonTree({ data }: Props) {
   const [activePath, setActivePath] = useState("");
   const isEmpty = data === "{}" || typeof data === "object" && data !== null && Object.keys(data).length === 0;
   const [expandedSet, setExpandedSet] = useState<Set<string>>(new Set());
-
+  useEffect(() => {
+    if (!data || typeof data !== "object") return;
+  
+    const firstLevel = new Set<string>();
+  
+    // expand root
+    firstLevel.add("");
+  
+    Object.keys(data).forEach((key) => {
+      firstLevel.add(key); // first level paths
+    });
+  
+    setExpandedSet(firstLevel);
+  }, [data]);
   const expandPath = (path: string[]) => {
     setExpandedSet((prev) => {
       const next = new Set(prev);
@@ -171,10 +184,15 @@ export default function JsonTree({ data }: Props) {
     });
   };
 
-  const runSearch = () => {
-    if (!query.trim()) return;
+  const runSearch = (q: string) => {
+    if (!q.trim()) {
+      setMatches([]);
+      setIndex(0);
+      setActivePath("");
+      return;
+    };
 
-    const res = searchJson(data, query);
+    const res = searchJson(data, q);
     setMatches(res);
     setIndex(0);
 
@@ -225,7 +243,7 @@ export default function JsonTree({ data }: Props) {
       {isEmpty && (
         <div className="empty-state">
           <p className="hint">
-            A JSON tree view that supports search with fuzzy matching. 
+            A JSON tree view that supports search with fuzzy matching.
             <br></br>
             Try pasting a JSON object to get started!
           </p>
@@ -248,7 +266,11 @@ export default function JsonTree({ data }: Props) {
             <div style={{ position: "relative", flex: 1 }}>
               <input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  const q = e.target.value;
+                  setQuery(q);
+                  runSearch(q);
+                }}
                 placeholder="Search"
                 style={{
                   width: "100%",
@@ -290,7 +312,7 @@ export default function JsonTree({ data }: Props) {
             </div>
 
             {/* SEARCH */}
-            <button onClick={runSearch} style={iconBtn}>
+            {/* <button onClick={runSearch} style={iconBtn}>
               <svg
                 width="14"
                 height="14"
@@ -304,7 +326,7 @@ export default function JsonTree({ data }: Props) {
                 <circle cx="11" cy="11" r="7" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
-            </button>
+            </button> */}
 
             {matches && matches.length > 0 && (
               <>

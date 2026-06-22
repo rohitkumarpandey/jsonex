@@ -63,7 +63,7 @@ export default function PrivacyPage() {
                 "No JSON content is stored or logged",
                 "No databases are used to persist your data",
               ].map((text, i) => (
-                <li key={i} className="flex items-start gap-2">
+                <li key={i} className="flex items-center gap-2">
                   <span
                     className="mt-[6px] text-xs"
                     style={{ color: "var(--accent)" }}
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
                     ●
                   </span>
                   <span
-                    className="text-[13px] leading-relaxed"
+                    className="text-[16px] leading-relaxed"
                     style={{ color: "var(--text-h)" }}
                   >
                     {text}
@@ -158,13 +158,16 @@ export default function PrivacyPage() {
             style={{
               background: "var(--accent-bg)",
               borderColor: "var(--accent-border)",
+              textAlign: "center"
             }}
           >
             <p
-              className="text-sm font-medium"
-              style={{ color: "var(--text-h)" }}
+              className="text-xm font-medium"
+              style={{ color: "var(--text-h)", fontSize: "1.6rem" }}
             >
-              Your data stays in your browser. JSONex never sees it.
+              Your data stays in your browser. 
+              <br/>
+              JSONex never sees it.
             </p>
           </section>
         </div>
