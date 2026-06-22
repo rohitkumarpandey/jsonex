@@ -1,4 +1,5 @@
 import { CornerDownRight } from "lucide-react";
+import Modal from "./components/Modal";
 
 export default function LandingPage() {
   return (
@@ -45,11 +46,11 @@ export default function LandingPage() {
             fontSize: "clamp(1.1rem, 2vw, 1.3rem)",
             letterSpacing: "0.15rem",
             textTransform: "uppercase",
-            color: "var(--text)",
+            color: "var(--text-h)",
             marginBottom: "1.8rem",
           }}
         >
-          Made for the developers, by the developer
+          Built for developers, by a developer
         </div>
 
         <p
@@ -71,7 +72,7 @@ export default function LandingPage() {
           href="/json-explorer"
           style={{
             padding: "1.4rem 2.6rem",
-            fontSize: "2.4rem",
+            fontSize: "1.8rem",
             borderRadius: "1rem",
             border: "0.1rem solid var(--accent-border)",
             background: "var(--accent-bg)",
@@ -85,7 +86,19 @@ export default function LandingPage() {
           }}
         >
           Open Explorer
-          <CornerDownRight size={18} />
+          <CornerDownRight size={14} />
+        </a>
+        <a
+          href="/feedback"
+          style={{
+            fontSize: "1.6rem",
+            marginTop: "1.6rem",
+            cursor: "pointer",
+            color: "var(--text)",
+            fontWeight: 600
+
+          }}>
+          [Got any feedback?]
         </a>
       </div>
 
