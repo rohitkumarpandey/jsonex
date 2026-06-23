@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BookmarkPopup from "./components/Bookmark";
+import { APP_METADATA } from "./constant/metadata";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -25,10 +26,7 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-export const metadata: Metadata = {
-  title: "JSON Explorer | Developer-first JSON tool",
-  description: "Developer-first JSON tool",
-};
+export const metadata: Metadata = APP_METADATA;
 
 export default function RootLayout({
   children,
@@ -43,11 +41,26 @@ export default function RootLayout({
     >
       <head>
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        {/* <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> */}
-        {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="JSONex" />
         <link rel="manifest" href="/site.webmanifest" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://jsonex.vercel.app",
+              "@type": "WebApplication",
+              name: "JSONex",
+              applicationCategory: "DeveloperApplication",
+              operatingSystem: "All",
+              description:
+                "Online JSON viewer, formatter, and explorer tool.",
+              url: "https://jsonex.vercel.app",
+            }),
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <Analytics />

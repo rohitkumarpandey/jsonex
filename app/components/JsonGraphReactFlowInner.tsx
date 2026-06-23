@@ -112,6 +112,9 @@ function GraphView({
 }: any) {
   const rf = useReactFlow();
 
+  // ✅ FIX: stabilize viewport
+  const memoViewport = useMemo(() => defaultViewport, [defaultViewport]);
+
   const focusNode = useCallback(
     (nodeId: string) => {
       const node = nodes.find((n: Node) => n.id === nodeId);
@@ -198,10 +201,7 @@ function GraphView({
 
   return (
     <>
-      {/* 🔍 SEARCH */}
-      <div
-        className="json-graph-search"
-      >
+      <div className="json-graph-search">
         <input
           placeholder="Search node..."
           value={search}
@@ -221,9 +221,10 @@ function GraphView({
             {filteredNodes.slice(0, 10).map((n: Node) => (
               <div
                 key={n.id}
-                onClick={() => { 
-                  selectNode(n.id)
-                  setSearch("")}}
+                onClick={() => {
+                  selectNode(n.id);
+                  setSearch("");
+                }}
                 className="json-graph-search-item"
               >
                 {n.data.label}
@@ -237,7 +238,7 @@ function GraphView({
         nodes={styledNodes}
         edges={styledEdges}
         onNodeClick={handleNodeClick}
-        defaultViewport={defaultViewport}
+        defaultViewport={memoViewport} // ✅ FIXED
         zoomOnScroll={false}
         panOnScroll
         panOnScrollMode={PanOnScrollMode.Free}
@@ -265,15 +266,18 @@ export default function JsonGraphFlow({ data }: Props) {
     [data]
   );
 
+  // ✅ FIX: stable viewport object
+  const modalViewport = useMemo(
+    () => ({ x: 100, y: 100, zoom: 1.2 }),
+    []
+  );
+
   if (!data) return <div>Loading...</div>;
 
   return (
     <>
-      {/* 🔹 INLINE */}
       <div
-        style={{
-          position: "relative",
-        }}
+        style={{ position: "relative" }}
         className="json-graph-container"
       >
         <button
@@ -302,7 +306,6 @@ export default function JsonGraphFlow({ data }: Props) {
         </ReactFlowProvider>
       </div>
 
-      {/* 🔥 MODAL */}
       <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
         <div
           style={{
@@ -321,7 +324,7 @@ export default function JsonGraphFlow({ data }: Props) {
               setSelectedPath={setSelectedPath}
               search={search}
               setSearch={setSearch}
-              defaultViewport={{ x: 100, y: 100, zoom: 1.2 }}
+              defaultViewport={modalViewport} // ✅ FIXED
             />
           </ReactFlowProvider>
         </div>
