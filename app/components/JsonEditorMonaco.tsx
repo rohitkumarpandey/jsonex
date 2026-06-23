@@ -228,10 +228,13 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
         document.body.style.cursor = "col-resize";
         document.body.style.userSelect = "none";
     };
-
-    const resetWidth = () => {
-        setWidth(32);
+    const getJsonSize = (data: string) => {
+        return new TextEncoder().encode(data).length;
     };
+    const formatSize = (bytes: number) => {
+        return (bytes / 1024).toFixed(2) + " KB";
+      };
+
 
     return (
         <div
@@ -358,8 +361,15 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
                         fontSize: 12,
                         wordWrap: "on",
                         automaticLayout: true,
+                        
                     }}
+                    
                 />
+            </div>
+            <div className="editor-info">
+                <div className="editor-info-item">
+                    {formatSize(getJsonSize(activeTabData.json))}
+                </div>
             </div>
 
             {toast && <div className="toast">{toast}</div>}

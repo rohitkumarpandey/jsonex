@@ -7,7 +7,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BookmarkPopup from "./components/Bookmark";
-import FeedbackForm from "./components/Feedback";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -42,13 +41,21 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${darkerGrotesque.variable} h-full`}
     >
+      <head>
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        {/* <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> */}
+        {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="JSONex" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <Analytics />
         <SpeedInsights />
         <Header />
         <div className="flex-1">{children}</div>
-        <BookmarkPopup/>
-        <Footer /> 
+        <BookmarkPopup />
+        <Footer />
       </body>
     </html>
   );

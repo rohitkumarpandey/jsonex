@@ -86,9 +86,9 @@ export default function LandingPage() {
           }}
         >
           Open Explorer
-          <CornerDownRight size={14} />
+          <CornerDownRight size={14} style={{marginTop: "0.4rem"}} />
         </a>
-        <a
+        {/* <a
           href="/feedback"
           style={{
             fontSize: "1.6rem",
@@ -99,7 +99,7 @@ export default function LandingPage() {
 
           }}>
           [Got any feedback?]
-        </a>
+        </a> */}
       </div>
 
       {/* FEATURES */}
