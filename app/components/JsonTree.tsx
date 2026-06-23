@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -156,20 +157,25 @@ export default function JsonTree({ data }: Props) {
   const [matches, setMatches] = useState<string[][]>([]);
   const [index, setIndex] = useState(0);
   const [activePath, setActivePath] = useState("");
-  const isEmpty = data === "{}" || typeof data === "object" && data !== null && Object.keys(data).length === 0;
+  const isEmpty = data &&
+    (data === "{}" || typeof data === "object" && data !== null && Object.keys(data).length === 0);
   const [expandedSet, setExpandedSet] = useState<Set<string>>(new Set());
   useEffect(() => {
-    if (!data || typeof data !== "object") return;
-  
+    if (!data || typeof data !== "object" || !Array.isArray(data)) return;
+    // if data size is small then only expand it
+    if (Array.isArray(data) && data?.length > 15 || Object.keys(data).length > 15) {
+      return;
+    }
+
     const firstLevel = new Set<string>();
-  
+
     // expand root
     firstLevel.add("");
-  
+
     Object.keys(data).forEach((key) => {
       firstLevel.add(key); // first level paths
     });
-  
+
     setExpandedSet(firstLevel);
   }, [data]);
   const expandPath = (path: string[]) => {
@@ -328,30 +334,33 @@ export default function JsonTree({ data }: Props) {
               </svg>
             </button> */}
 
-            {matches && matches.length > 0 && (
-              <>
-                {/* NAV */}
-                <button style={iconBtn} onClick={prev}>↑</button>
-                <button style={iconBtn} onClick={next}>↓</button>
 
-                {/* MATCH COUNT (current/total) */}
-                <div
-                  style={{
-                    marginLeft: "auto",
-                    fontSize: "1.1rem",
-                    padding: "0.2rem",
-                    borderRadius: "0.6rem",
-                    color: "var(--text)",
-                    minWidth: "6rem",
-                    textAlign: "center",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {matches.length > 0 ? `${index + 1}/${matches.length}` : "0/0"}
-                </div>
-              </>
-            )
-            }
+            <>
+              {/* NAV */}
+              <button className="search-icon-btn" onClick={prev} disabled={!matches || matches.length == 0}>
+                <ArrowUp size={12} />
+              </button>
+              <button className="search-icon-btn" onClick={next} disabled={!matches || matches.length == 0}>
+                <ArrowDown size={12} />
+              </button>
+
+              {/* MATCH COUNT (current/total) */}
+              <div
+                style={{
+                  marginLeft: "auto",
+                  fontSize: "1rem",
+                  padding: "0.2rem",
+                  borderRadius: "0.6rem",
+                  color: "var(--text)",
+                  minWidth: "8rem",
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {matches.length > 0 ? `${index + 1}/${matches.length}` : "No results"}
+              </div>
+            </>
+
 
           </div>
         </>}
@@ -373,17 +382,3 @@ export default function JsonTree({ data }: Props) {
     </div>
   );
 }
-
-const iconBtn = {
-  width: "2.8rem",
-  height: "2.8rem",
-  border: "0.1rem solid var(--border)",
-  borderRadius: "0.6rem",
-  background: "var(--bg)",
-  cursor: "pointer",
-  fontSize: "1.2rem",
-  color: "var(--text-h)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};

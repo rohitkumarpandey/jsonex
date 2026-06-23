@@ -18,9 +18,10 @@ type Tab = {
 type Props = {
     json: string;
     handleJsonChange: (val: string) => void;
+    size: number
 };
 
-export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
+export default function JsonEditorMonaco({ json, size, handleJsonChange }: Props) {
     const [theme, setTheme] = useState<"light" | "vs-dark">("vs-dark");
     const [toast, setToast] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -228,9 +229,6 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
         document.body.style.cursor = "col-resize";
         document.body.style.userSelect = "none";
     };
-    const getJsonSize = (data: string) => {
-        return new TextEncoder().encode(data).length;
-    };
     const formatSize = (bytes: number) => {
         return (bytes / 1024).toFixed(2) + " KB";
       };
@@ -368,7 +366,7 @@ export default function JsonEditorMonaco({ json, handleJsonChange }: Props) {
             </div>
             <div className="editor-info">
                 <div className="editor-info-item">
-                    {formatSize(getJsonSize(activeTabData.json))}
+                    {formatSize(size)}
                 </div>
             </div>
 
