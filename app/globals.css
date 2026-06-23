@@ -104,6 +104,42 @@ p {
   box-sizing: border-box;
 }
 
+.search-icon-btn {
+
+  width: 2.8rem;
+
+  height: 2.8rem;
+
+  border: 0.1rem solid var(--border);
+
+  border-radius: 0.6rem;
+
+  background: var(--bg);
+
+  cursor: pointer;
+
+  font-size: 1.2rem;
+
+  color: var(--text-h);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+button:disabled {
+  background: var(--code-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 /* HEADINGS */
 h1,
 h2 {
@@ -654,6 +690,7 @@ textarea:focus {
   justify-content: flex-end;
   width: 100%;
 }
+
 .json-editor-container .editor-info::before {
   position: absolute;
   content: "";
@@ -662,6 +699,7 @@ textarea:focus {
   background-color: var(--bg);
   opacity: 0.4;
 }
+
 .json-editor-container .editor-info .editor-info-item {
   color: var(--text);
   font-weight: 600;
