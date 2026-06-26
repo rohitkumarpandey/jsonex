@@ -51,7 +51,7 @@ export default function BookmarkPopup() {
         <h3>⭐ Bookmark JSONex</h3>
         <p>Save this page for quick access to your JSONex tools anytime.</p>
 
-        <div className="hint">
+        <div className="bookmark-hint">
           <div>
             <strong>{platform}:</strong> <span>{shortcut}</span>
           </div>
@@ -60,7 +60,7 @@ export default function BookmarkPopup() {
 
         <div className="actions">
           <button className="primary" onClick={close}>
-            Got it
+            Got it!
           </button>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function BookmarkPopup() {
           border: 1px solid var(--border);
           border-radius: 12px;
           padding: 16px;
-          width: 260px;
+          width: 360px;
           position: relative;
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
@@ -117,16 +117,16 @@ export default function BookmarkPopup() {
           color: var(--text);
         }
 
-        .hint {
+        .bookmark-hint {
           background: var(--bg);
           border: 1px solid var(--border);
           padding: 10px;
           border-radius: 8px;
-          font-size: 12px;
+          font-size: 16px;
           margin-bottom: 12px;
         }
 
-        .hint span {
+        .bookmark-hint span {
           color: var(--accent);
           font-weight: 600;
         }
@@ -134,7 +134,7 @@ export default function BookmarkPopup() {
         .alt {
           margin-top: 6px;
           opacity: 0.7;
-          font-size: 11px;
+          font-size: 14px;
         }
 
         .actions {
@@ -143,17 +143,17 @@ export default function BookmarkPopup() {
         }
 
         .primary {
-          background: var(--accent-bg);
-          border: 1px solid var(--accent-border);
-          color: var(--accent);
-          padding: 6px 10px;
+          border: 1px solid var(--border);
+          color: var(--text-h);
+          padding: 6px 24px;
           border-radius: 6px;
           cursor: pointer;
+          font-size: 1.4rem;
         }
 
         .primary:hover {
-          background: var(--accent);
-          color: #000;
+          color: var(--text-h);
+          border-color: var(--accent-border);
         }
       `}</style>
     </div>
