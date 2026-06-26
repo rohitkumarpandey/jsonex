@@ -104,6 +104,24 @@ p {
   box-sizing: border-box;
 }
 
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.6rem;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.resize-handle.dragging {
+  background: rgba(0, 0, 0, 0.15);
+}
+
 .search-icon-btn {
 
   width: 2.8rem;
@@ -425,6 +443,9 @@ h2 {
     font-size: 56.25%;
     /* 1rem = 9px */
   }
+  .resize-handle  {
+    display: none;
+  }
 
   .json-explorer-container {
     flex-direction: column;
@@ -459,6 +480,9 @@ h2 {
   html {
     font-size: 62.5%;
     /* 1rem = 10px */
+  }
+  .resize-handle  {
+    display: none;
   }
 
   .json-explorer-container {
@@ -572,8 +596,12 @@ h2 {
 .feedback-wrapper {
   width: 90%;
   padding: 40px 0;
-
   margin: 0 auto;
+}
+
+.feedback-wrapper input::placeholder, 
+textarea::placeholder {
+  color: var(--text-h);
 }
 
 @media (min-width: 1024px) {
@@ -706,4 +734,15 @@ textarea:focus {
   padding: 0 0.8rem 0 0;
   opacity: 1;
   z-index: 2;
+}
+
+.feedback-link {
+  color: var(--text-h);
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.feedback-link:hover {
+  font-weight: 600;
+  scale: 1.02;
 }

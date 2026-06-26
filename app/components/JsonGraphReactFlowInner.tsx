@@ -272,8 +272,6 @@ export default function JsonGraphFlow({ data }: Props) {
     []
   );
 
-  if (!data) return <div>Loading...</div>;
-
   return (
     <>
       <div
