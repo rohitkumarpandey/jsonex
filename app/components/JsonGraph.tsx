@@ -72,7 +72,6 @@ export default function JsonGraph({ data }: Props) {
     });
   }, [data, mounted]);
 
-  if (!data || !mounted) return <div>Loading...</div>;
 
   // 🔥 open modal + reset zoom
   const openFullscreen = () => {

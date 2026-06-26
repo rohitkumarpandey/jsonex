@@ -46,7 +46,7 @@ export default function Page() {
     <div className="json-explorer-container">
       <JsonEditorMonaco json={json} handleJsonChange={setJson} size={workerData?.size || 0} />
       <JsonTree data={workerData?.tree || {}} />
-      <JsonGraphFlow data={workerData?.graph}
+      <JsonGraphFlow data={workerData?.graph || {}}
       />
     </div>
   );

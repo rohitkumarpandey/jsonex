@@ -12,7 +12,7 @@ export default function Footer() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        fontSize: "1.2rem",
+        fontSize: "1.6rem",
         color: "var(--text-h)",
         background: "var(--bg)",
       }}

@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BookmarkPopup from "./components/Bookmark";
-import { APP_METADATA } from "./constant/metadata";
+import { APP_METADATA } from "./metadata";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -45,12 +45,11 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="JSONex" />
-        <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://jsonex.vercel.app",
+              "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "JSONex",
               applicationCategory: "DeveloperApplication",

@@ -251,30 +251,8 @@ export default function JsonEditorMonaco({ json, size, handleJsonChange }: Props
         >
             {/* RESIZER */}
             <div
+            className="json-editor-resizer resize-handle"
                 onMouseDown={startResize}
-                style={{
-                    position: "absolute",
-
-                    right: 0,
-
-                    top: 0,
-
-                    width: "16px", // slightly bigger hit area
-
-                    height: "100%",
-
-                    cursor: "col-resize",
-
-                    zIndex: 10,
-
-                    background: isDragging ? "rgba(0,0,0,0.15)" : "transparent",
-
-                    display: "flex",
-
-                    alignItems: "center",
-
-                    justifyContent: "center",
-                }}
                 onMouseEnter={(e) => {
                     if (!isDragging)
                         e.currentTarget.style.background = "rgba(0,0,0,0.1)";

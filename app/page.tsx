@@ -28,7 +28,13 @@ export default function LandingPage() {
         }}
       >
         {/* PRIMARY SEO HEADING */}
-        <h1 style={{ fontSize: "clamp(2.8rem, 4vw, 3.6rem)", marginBottom: "1rem", letterSpacing: "-0.1rem" }}>
+        <h1
+          style={{
+            fontSize: "clamp(2.8rem, 4vw, 3.6rem)",
+            marginBottom: "1rem",
+            letterSpacing: "-0.1rem",
+          }}
+        >
           JSON Viewer, Formatter & Explorer Online
         </h1>
 
@@ -54,29 +60,44 @@ export default function LandingPage() {
           }}
         >
           Free online JSON viewer, formatter, and explorer for developers.
-          Visualize complex JSON in a tree view, edit with real-time validation,
-          and explore relationships using graph visualization — all in one tool.
+          Format, validate, search, and visualize JSON with tree and graph
+          views, upload or download files, and work across multiple tabs—all in
+          one place.
         </p>
 
-        <a
-          href="/json-explorer"
-          aria-label="Open JSON viewer and formatter tool"
+        <div
           style={{
-            padding: "1.4rem 2.6rem",
-            fontSize: "1.8rem",
-            borderRadius: "1rem",
-            border: "0.1rem solid var(--accent-border)",
-            background: "var(--accent-bg)",
-            color: "var(--text-h)",
-            fontWeight: 600,
-            display: "inline-flex",
+            display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "0.8rem",
+            gap: "1.2rem",
           }}
         >
-          Open JSON Viewer & Formatter
-          <CornerDownRight size={14} style={{marginTop: "0.4rem"}} />
-        </a>
+          <a
+            href="/json-explorer"
+            aria-label="Open JSON Explorer"
+            style={{
+              padding: "1.4rem 2.6rem",
+              fontSize: "1.8rem",
+              borderRadius: "1rem",
+              border: "0.1rem solid var(--accent-border)",
+              background: "var(--accent-bg)",
+              color: "var(--text-h)",
+              fontWeight: 600,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.8rem",
+              textDecoration: "none",
+            }}
+          >
+            Open JSON Explorer
+            <CornerDownRight size={14} style={{ marginTop: "0.4rem" }} />
+          </a>
+
+          <a href="/feedback" className="feedback-link">
+            [Got any feedback?]
+          </a>
+        </div>
       </section>
 
       {/* FEATURES */}
@@ -87,31 +108,41 @@ export default function LandingPage() {
           gap: "1.6rem",
           padding: "4rem clamp(1.6rem, 5vw, 6rem)",
           maxWidth: "100rem",
-          justifyContent:"center",
+          justifyContent: "center",
           margin: "0 auto",
           width: "100%",
         }}
       >
-        <h2 style={{ gridColumn: "1/-1", fontSize: "2rem", textAlign: "center" }}>
-          JSON Viewer, Formatter and Editor Features
+        <h2
+          style={{
+            gridColumn: "1/-1",
+            fontSize: "2rem",
+            textAlign: "center",
+          }}
+        >
+          JSON Viewer, Formatter & Visualization Features
         </h2>
 
         {[
           {
             title: "JSON Editor",
-            desc: "Edit and format JSON with real-time validation, linting, and syntax highlighting.",
+            desc: "Format, edit, validate, and search JSON with syntax highlighting and real-time error detection.",
           },
           {
             title: "JSON Tree View",
-            desc: "Visualize nested JSON data with an expandable and collapsible tree view.",
+            desc: "Navigate deeply nested JSON with an expandable tree view for faster inspection and debugging.",
           },
           {
             title: "JSON Graph Explorer",
-            desc: "Explore relationships between JSON nodes using interactive graph visualization.",
+            desc: "Visualize relationships between JSON objects and arrays using an interactive graph view.",
           },
-        ].map((f) => (
+          {
+            title: "Developer Tools",
+            desc: "Upload and download JSON files, work across multiple tabs, and inspect large JSON documents with ease.",
+          },
+        ].map((feature) => (
           <article
-            key={f.title}
+            key={feature.title}
             style={{
               border: "0.1rem solid var(--border)",
               borderRadius: "1.2rem",
@@ -126,10 +157,16 @@ export default function LandingPage() {
                 marginBottom: "0.8rem",
               }}
             >
-              {f.title}
+              {feature.title}
             </h3>
-            <p style={{ fontSize: "1.3rem", lineHeight: "1.6" }}>
-              {f.desc}
+
+            <p
+              style={{
+                fontSize: "1.3rem",
+                lineHeight: "1.6",
+              }}
+            >
+              {feature.desc}
             </p>
           </article>
         ))}
@@ -144,21 +181,40 @@ export default function LandingPage() {
           borderTop: "0.1rem solid var(--border)",
         }}
       >
-        <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-          Online JSON Viewer, Formatter and Editor
+        <h2
+          style={{
+            fontSize: "2rem",
+            marginBottom: "1rem",
+          }}
+        >
+          Complete Online JSON Viewer, Formatter & Explorer
         </h2>
 
-        <p style={{ lineHeight: "1.7", fontSize: "1.4rem" }}>
-          JSONex is a complete JSON viewer, formatter, and editor designed for
-          developers working with APIs, logs, and structured data. Format and
-          beautify JSON instantly, inspect data in a tree view, and debug faster
-          using multiple visualization modes.
+        <p
+          style={{
+            lineHeight: "1.7",
+            fontSize: "1.4rem",
+          }}
+        >
+          JSONex is an all-in-one JSON toolkit for developers working with APIs,
+          logs, configuration files, and structured data. Format and validate
+          JSON instantly, inspect data in an expandable tree view, visualize
+          relationships with an interactive graph, and edit content with
+          real-time validation.
         </p>
 
-        <p style={{ lineHeight: "1.7", fontSize: "1.4rem", marginTop: "1rem" }}>
-          Whether you are formatting JSON, validating API responses, or exploring
-          complex nested objects, this tool provides everything you need in one
-          place — without switching between multiple JSON tools.
+        <p
+          style={{
+            lineHeight: "1.7",
+            fontSize: "1.4rem",
+            marginTop: "1rem",
+          }}
+        >
+          Whether you're debugging API responses, exploring complex nested
+          objects, or formatting large JSON files, JSONex brings everything
+          together in one place. Search instantly, upload and download JSON
+          files, work across multiple tabs, and switch seamlessly between code,
+          tree, and graph views—without relying on multiple JSON tools.
         </p>
       </section>
     </main>
